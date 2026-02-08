@@ -26,7 +26,7 @@ impl State {
 
         let adapter = instance.request_adapter(
             &wgpu::RequestAdapterOptions{
-                power_preference: wgpu::PowerPreference.default(), 
+                power_preference: wgpu::PowerPreference::default(), 
                 compatible_surface: Some(&surface), 
                 force_fallback_adapter: false
             }
@@ -35,17 +35,35 @@ impl State {
         // TODO: (maaahad) test with adapter_enumerate
 
         let (device, queue) = adapter.request_device(
-            &wgpu::DeviceDepcriptor {
+            &wgpu::DeviceDescriptor {
                 label: None, 
                 required_features: wgpu::Features::empty(), 
                 experimental_features: wgpu::ExperimentalFeatures::disabled(), 
                 required_limits: wgpu::Limits::default(), 
-                memory_hits: Default::default(), 
+                memory_hints: Default::default(), 
                 trace: wgpu::Trace::Off 
             }
         ).await?; 
 
-        Ok(Self{window, surface, device, queue})
+        let surface_caps = surface.get_capabilities(&adapter); 
+
+        let surface_format = surface_caps.formats.iter()
+            .find(|f| f.is_srgb())
+            .copied()
+            .unwrap_or(surface_caps.formats[0]);
+
+        let configs = wgpu::SurfaceConfiguration {
+            usage: wgpu::TextureUsages::RENDER_ATTACHMENT, 
+            format: surface_format, 
+            width: size.width, 
+            height: size.height, 
+            present_mode: surface_caps.present_modes[0], 
+            alpha_mode: surface_caps.alpha_modes[0], 
+            view_formats: vec![], 
+            desired_maximum_frame_latency: 2 
+        }; 
+
+        Ok(Self{window, surface, device, queue, configs, is_surface_configured: false})
     }
 
     pub fn resize(&mut self, _width: u32, _height: u32) {
