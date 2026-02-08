@@ -78,6 +78,13 @@ impl State {
     pub fn render(&mut self) {
         self.window.request_redraw(); 
     }
+
+    fn handle_key(&self, event_loop: &ActiveEventLoop, code: KeyCode, is_pressed: bool) {
+        match (code, is_pressed) {
+            (KeyCode::Escape, true) => event_loop.exit(),
+            _ => {}
+        }
+    }
 }
 
 pub struct App {
@@ -115,8 +122,16 @@ impl ApplicationHandler<State> for App {
             WindowEvent::CloseRequested => event_loop.exit(), 
             WindowEvent::Resized(size) => state.resize(size.width, size.height), 
             WindowEvent::RedrawRequested => state.render(), 
-            _ => println!("Add KeyboardInput"), 
-            // Window::KeyboardInput{..} => pringln!("Keyboard Input"), 
+            WindowEvent::KeyboardInput{
+                event:
+                KeyEvent {
+                    physical_key: PhysicalKey::Code(code),
+                    state: key_state,
+                    ..
+                },
+                ..
+            } => state.handle_key(event_loop, code, key_state.is_pressed()), 
+            _ => {}
         }
 
     }
