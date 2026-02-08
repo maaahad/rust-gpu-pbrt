@@ -3,13 +3,38 @@ use winit::{
     application::ApplicationHandler, event::*, event_loop::{ActiveEventLoop, EventLoop}, keyboard::{KeyCode, PhysicalKey}, window::{Window, WindowId}
 }; 
 
+// TODO: (maaahad) this should go to lib.rs module
 pub struct State {
+    surface: wgpu::Surface<'static>, 
+    device: wgpu::Device, 
+    configs: wgpu::SurfaceConfiguration, 
+    is_surface_configured: bool, 
     window: Arc<Window>,
 }
 
 impl State {
     pub async fn new(window: Arc<Window>) -> anyhow::Result<Self> {
-        Ok(Self{window})
+        let size = window.inner_size(); 
+
+        let instance = wgpu::Instance::new(&wgpu::InstanceDescriptor {
+            backends: wgpu::Backends::PRIMARY,
+            ..Default::default() 
+        }); 
+
+        let surface = instance.create_surface(window.clone()).unwrap(); 
+
+        let adapter = instance.request_adapter(
+            &wgpu::RequestAdapterOptions{
+                power_preference: wgpu::PowerPreference.default(), 
+                compatible_surface: Some(&surface), 
+                force_fallback_adapter: false
+            }
+        ); 
+
+        // TODO: (maaahad) test with adapter_enumerate
+
+        
+        Ok(Self{window, surface})
     }
 
     pub fn resize(&mut self, _width: u32, _height: u32) {
