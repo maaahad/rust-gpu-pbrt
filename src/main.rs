@@ -66,8 +66,13 @@ impl State {
         Ok(Self{window, surface, device, queue, configs, is_surface_configured: false})
     }
 
-    pub fn resize(&mut self, _width: u32, _height: u32) {
-        println!("Resize : window resize"); 
+    pub fn resize(&mut self, width: u32, height: u32) {
+        if width > 0 && height > 0 {
+            self.configs.width = width; 
+            self.configs.height = height; 
+            self.surface.configure(&self.device, &self.configs); 
+            self.is_surface_configured = true; 
+        }
     }
 
     pub fn render(&mut self) {
