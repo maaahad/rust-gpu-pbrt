@@ -7,6 +7,7 @@ use winit::{
 pub struct State {
     surface: wgpu::Surface<'static>, 
     device: wgpu::Device, 
+    queue: wgpu::Queue, 
     configs: wgpu::SurfaceConfiguration, 
     is_surface_configured: bool, 
     window: Arc<Window>,
@@ -29,12 +30,22 @@ impl State {
                 compatible_surface: Some(&surface), 
                 force_fallback_adapter: false
             }
-        ); 
+        ).await?; 
 
         // TODO: (maaahad) test with adapter_enumerate
 
-        
-        Ok(Self{window, surface})
+        let (device, queue) = adapter.request_device(
+            &wgpu::DeviceDepcriptor {
+                label: None, 
+                required_features: wgpu::Features::empty(), 
+                experimental_features: wgpu::ExperimentalFeatures::disabled(), 
+                required_limits: wgpu::Limits::default(), 
+                memory_hits: Default::default(), 
+                trace: wgpu::Trace::Off 
+            }
+        ).await?; 
+
+        Ok(Self{window, surface, device, queue})
     }
 
     pub fn resize(&mut self, _width: u32, _height: u32) {
