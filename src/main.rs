@@ -1,3 +1,4 @@
+use pbrt::test;
 fn main() {
-    println!("Hello, world!");
+    test();
 }

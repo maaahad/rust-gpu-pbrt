@@ -1,6 +1,14 @@
 [package]
-name = "rust-gpu-pbrt"
+name = "rust-pbrt"
 version = "0.1.0"
 edition = "2024"
+
+[lib]
+name = "pbrt"
+path = "src/lib.rs"
+
+[[bin]]
+name = "pbrt"
+path = "src/main.rs"
 
 [dependencies]
