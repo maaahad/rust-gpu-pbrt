@@ -3,5 +3,5 @@
 version = 4
 
 [[package]]
-name = "rust-gpu-pbrt"
+name = "rust-pbrt"
 version = "0.1.0"
