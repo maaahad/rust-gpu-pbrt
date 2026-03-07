@@ -1,5 +1,8 @@
 use std::ops::Index;
 
+#[cfg(test)]
+mod tests;
+
 #[derive(Debug)]
 pub struct Vector3<T> {
     pub x: T,
