@@ -29,3 +29,26 @@ impl<T> Index<usize> for Vector3<T> {
         }
     }
 }
+
+#[derive(Debug)]
+pub struct Vector2<T> {
+    x: T,
+    y: T,
+}
+
+impl<T> Vector2<T> {
+    pub fn new(x: T, y: T) -> Self {
+        Self { x, y }
+    }
+}
+
+impl<T> Index<usize> for Vector2<T> {
+    type Output = T;
+    fn index(&self, index: usize) -> &Self::Output {
+        match index {
+            0 => &self.x,
+            1 => &self.y,
+            _ => panic!("out of bounds. Max index should be 1 for Vector2"),
+        }
+    }
+}
