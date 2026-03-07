@@ -25,8 +25,7 @@ impl<T> Index<usize> for Vector3<T> {
             0 => &self.x,
             1 => &self.y,
             2 => &self.z,
-            _ => panic!("out of bounds. Max index should be 2"), // TODO: any better way to handle
-                                                                 // this
+            _ => panic!("out of bounds. Max index should be 2 for Vector3"), // TODO: any better way
         }
     }
 }
