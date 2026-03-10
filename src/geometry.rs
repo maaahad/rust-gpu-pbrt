@@ -1,4 +1,4 @@
-use std::ops::Index;
+use std::ops::{Add, Index};
 
 #[cfg(test)]
 mod tests;
@@ -17,7 +17,18 @@ impl<T> Vector3<T> {
     }
 }
 
-// Operators
+// Operators overloads
+impl<T: Add<Output = T>> Add<Vector3<T>> for Vector3<T> {
+    type Output = Vector3<T>;
+    fn add(self, other: Vector3<T>) -> Self::Output {
+        Self {
+            x: self.x + other.x,
+            y: self.y + other.y,
+            z: self.z + other.z,
+        }
+    }
+}
+
 impl<T> Index<usize> for Vector3<T> {
     type Output = T;
     fn index(&self, index: usize) -> &Self::Output {
@@ -42,6 +53,7 @@ impl<T> Vector2<T> {
     }
 }
 
+// Operators overloads
 impl<T> Index<usize> for Vector2<T> {
     type Output = T;
     fn index(&self, index: usize) -> &Self::Output {
