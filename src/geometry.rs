@@ -29,6 +29,12 @@ impl<T: Add<Output = T>> Add<Vector3<T>> for Vector3<T> {
     }
 }
 
+impl<T: PartialEq> PartialEq<Vector3<T>> for Vector3<T> {
+    fn eq(&self, other: &Vector3<T>) -> bool {
+        self.x == other.x && self.y == other.y && self.z == other.z
+    }
+}
+
 impl<T> Index<usize> for Vector3<T> {
     type Output = T;
     fn index(&self, index: usize) -> &Self::Output {

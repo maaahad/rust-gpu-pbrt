@@ -23,6 +23,15 @@ fn vector3_add_operator() {
 }
 
 #[test]
+fn vector3_eq_operator() {
+    let vec3_1: Vector3<i32> = Vector3::new(1, 2, 3);
+    let vec3_2: Vector3<i32> = Vector3::new(3, 2, 1);
+    let expected: Vector3<i32> = Vector3::new(4, 4, 4);
+    let got = vec3_1 + vec3_2;
+    assert_eq!(expected, got)
+}
+
+#[test]
 fn vector2_index_operator() {
     let vector2: Vector2<i32> = Vector2::new(1, 2);
 
