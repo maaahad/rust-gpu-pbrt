@@ -1,4 +1,4 @@
-use std::ops::{Add, Index};
+use std::ops::{Add, Index, Sub};
 
 #[cfg(test)]
 mod tests;
@@ -25,6 +25,17 @@ impl<T: Add<Output = T>> Add<Vector3<T>> for Vector3<T> {
             x: self.x + other.x,
             y: self.y + other.y,
             z: self.z + other.z,
+        }
+    }
+}
+
+impl<T: Sub<Output = T>> Sub<Vector3<T>> for Vector3<T> {
+    type Output = Vector3<T>;
+    fn sub(self, other: Vector3<T>) -> Self::Output {
+        Self {
+            x: self.x - other.x,
+            y: self.y - other.y,
+            z: self.z - other.z,
         }
     }
 }

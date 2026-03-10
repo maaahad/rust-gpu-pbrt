@@ -23,6 +23,18 @@ fn vector3_add_operator() {
 }
 
 #[test]
+fn vector3_sub_operator() {
+    let vec3_1: Vector3<i32> = Vector3::new(1, 2, 3);
+    let vec3_2: Vector3<i32> = Vector3::new(3, 2, 1);
+    let expected: Vector3<i32> = Vector3::new(-2, 0, 2);
+    let got = vec3_1 - vec3_2;
+
+    assert_eq!(expected.x, got.x);
+    assert_eq!(expected.y, got.y);
+    assert_eq!(expected.z, got.z);
+}
+
+#[test]
 fn vector3_eq_operator() {
     let vec3_1: Vector3<i32> = Vector3::new(1, 2, 3);
     let vec3_2: Vector3<i32> = Vector3::new(3, 2, 1);
