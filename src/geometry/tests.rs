@@ -2,15 +2,6 @@
 use super::*;
 
 #[test]
-fn vector3_index_operator() {
-    let vec3: Vector3<i32> = Vector3::new(1, 2, 3);
-
-    assert_eq!(vec3.x, vec3[0]);
-    assert_eq!(vec3.y, vec3[1]);
-    assert_eq!(vec3.z, vec3[2]);
-}
-
-#[test]
 fn vector3_add_operator() {
     let vec3_1: Vector3<i32> = Vector3::new(1, 2, 3);
     let vec3_2: Vector3<i32> = Vector3::new(3, 2, 1);
@@ -41,6 +32,23 @@ fn vector3_eq_operator() {
     let expected: Vector3<i32> = Vector3::new(4, 4, 4);
     let got = vec3_1 + vec3_2;
     assert_eq!(expected, got)
+}
+
+#[test]
+fn vector2_mul_by_scalar() {
+    let vec3: Vector3<i32> = Vector3::new(1, 2, 3);
+    let expected = Vector3::new(2, 4, 6);
+    let got = vec3 * 2;
+    assert_eq!(expected, got);
+}
+
+#[test]
+fn vector3_index_operator() {
+    let vec3: Vector3<i32> = Vector3::new(1, 2, 3);
+
+    assert_eq!(vec3.x, vec3[0]);
+    assert_eq!(vec3.y, vec3[1]);
+    assert_eq!(vec3.z, vec3[2]);
 }
 
 #[test]

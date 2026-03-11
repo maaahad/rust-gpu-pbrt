@@ -1,4 +1,4 @@
-use std::ops::{Add, Index, Sub};
+use std::ops::{Add, Index, Mul, Sub};
 
 #[cfg(test)]
 mod tests;
@@ -43,6 +43,21 @@ impl<T: Sub<Output = T>> Sub<Vector3<T>> for Vector3<T> {
 impl<T: PartialEq> PartialEq<Vector3<T>> for Vector3<T> {
     fn eq(&self, other: &Vector3<T>) -> bool {
         self.x == other.x && self.y == other.y && self.z == other.z
+    }
+}
+
+impl<T> Mul<T> for Vector3<T>
+where
+    T: Mul<Output = T> + Copy,
+{
+    type Output = Vector3<T>;
+
+    fn mul(self, multiplier: T) -> Self::Output {
+        Self {
+            x: self.x * multiplier,
+            y: self.y * multiplier,
+            z: self.z * multiplier,
+        }
     }
 }
 
