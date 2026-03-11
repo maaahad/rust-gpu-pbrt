@@ -20,29 +20,29 @@ impl<T> Vector3<T> {
 // Operators overloads
 impl<T: Add<Output = T>> Add<Vector3<T>> for Vector3<T> {
     type Output = Vector3<T>;
-    fn add(self, other: Vector3<T>) -> Self::Output {
+    fn add(self, rhs: Vector3<T>) -> Self::Output {
         Self {
-            x: self.x + other.x,
-            y: self.y + other.y,
-            z: self.z + other.z,
+            x: self.x + rhs.x,
+            y: self.y + rhs.y,
+            z: self.z + rhs.z,
         }
     }
 }
 
 impl<T: Sub<Output = T>> Sub<Vector3<T>> for Vector3<T> {
     type Output = Vector3<T>;
-    fn sub(self, other: Vector3<T>) -> Self::Output {
+    fn sub(self, rhs: Vector3<T>) -> Self::Output {
         Self {
-            x: self.x - other.x,
-            y: self.y - other.y,
-            z: self.z - other.z,
+            x: self.x - rhs.x,
+            y: self.y - rhs.y,
+            z: self.z - rhs.z,
         }
     }
 }
 
 impl<T: PartialEq> PartialEq<Vector3<T>> for Vector3<T> {
-    fn eq(&self, other: &Vector3<T>) -> bool {
-        self.x == other.x && self.y == other.y && self.z == other.z
+    fn eq(&self, rhs: &Vector3<T>) -> bool {
+        self.x == rhs.x && self.y == rhs.y && self.z == rhs.z
     }
 }
 
