@@ -1,4 +1,4 @@
-use std::ops::{Add, Index, Mul, Sub};
+use std::ops::{Add, AddAssign, Index, Mul, Sub};
 
 #[cfg(test)]
 mod tests;
@@ -26,6 +26,19 @@ impl<T: Add<Output = T>> Add<Vector3<T>> for Vector3<T> {
             y: self.y + rhs.y,
             z: self.z + rhs.z,
         }
+    }
+}
+
+impl<T> AddAssign<Vector3<T>> for Vector3<T>
+where
+    T: Add<Output = T> + Copy,
+{
+    fn add_assign(&mut self, rhs: Vector3<T>) {
+        *self = Self {
+            x: self.x + rhs.x,
+            y: self.y + rhs.y,
+            z: self.z + rhs.z,
+        };
     }
 }
 

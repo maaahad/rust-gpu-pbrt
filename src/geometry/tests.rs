@@ -1,6 +1,7 @@
 // use crate::geometry::Vector3;
 use super::*;
 
+// [+, +=]
 #[test]
 fn vector3_add_operator() {
     let vec3_1: Vector3<i32> = Vector3::new(1, 2, 3);
@@ -11,6 +12,15 @@ fn vector3_add_operator() {
     assert_eq!(expected.x, got.x);
     assert_eq!(expected.y, got.y);
     assert_eq!(expected.z, got.z);
+}
+
+#[test]
+fn vector3_add_assign_operator() {
+    let mut vector3_1 = Vector3::new(1, 2, 3);
+    vector3_1 += Vector3::new(1, 2, 3);
+
+    let expected = Vector3::new(2, 4, 6);
+    assert_eq!(expected, vector3_1);
 }
 
 #[test]
