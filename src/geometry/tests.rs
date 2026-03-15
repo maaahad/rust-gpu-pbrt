@@ -29,9 +29,15 @@ fn vector3_sub_operator() {
 fn vector3_eq_operator() {
     let vec3_1: Vector3<i32> = Vector3::new(1, 2, 3);
     let vec3_2: Vector3<i32> = Vector3::new(3, 2, 1);
-    let expected: Vector3<i32> = Vector3::new(4, 4, 4);
-    let got = vec3_1 + vec3_2;
-    assert_eq!(expected, got)
+    let vec3_3: Vector3<i32> = Vector3::new(1, 2, 3);
+
+    let equal_vector = vec3_1 == vec3_3;
+    let expected_equal = true;
+    assert_eq!(expected_equal, equal_vector);
+
+    let not_equal_vector = vec3_1 == vec3_2;
+    let expected_not_equal = false;
+    assert_eq!(expected_not_equal, not_equal_vector)
 }
 
 #[test]
