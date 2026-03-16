@@ -1,6 +1,7 @@
 // use crate::geometry::Vector3;
 use super::*;
 
+// Vector3
 // [+, +=]
 #[test]
 fn vector3_add_operator() {
@@ -46,6 +47,15 @@ fn vector3_sub_assign_operator() {
 }
 
 #[test]
+fn vector2_mul_by_scalar() {
+    let vec3: Vector3<i32> = Vector3::new(1, 2, 3);
+    let expected = Vector3::new(2, 4, 6);
+    let got = vec3 * 2;
+    assert_eq!(expected, got);
+}
+
+// [=]
+#[test]
 fn vector3_eq_operator() {
     let vec3_1: Vector3<i32> = Vector3::new(1, 2, 3);
     let vec3_2: Vector3<i32> = Vector3::new(3, 2, 1);
@@ -60,14 +70,7 @@ fn vector3_eq_operator() {
     assert_eq!(expected_not_equal, not_equal_vector)
 }
 
-#[test]
-fn vector2_mul_by_scalar() {
-    let vec3: Vector3<i32> = Vector3::new(1, 2, 3);
-    let expected = Vector3::new(2, 4, 6);
-    let got = vec3 * 2;
-    assert_eq!(expected, got);
-}
-
+// [[]]
 #[test]
 fn vector3_index_operator() {
     let vec3: Vector3<i32> = Vector3::new(1, 2, 3);
@@ -77,6 +80,7 @@ fn vector3_index_operator() {
     assert_eq!(vec3.z, vec3[2]);
 }
 
+// Vector2
 #[test]
 fn vector2_index_operator() {
     let vector2: Vector2<i32> = Vector2::new(1, 2);
