@@ -5,10 +5,10 @@ use super::*;
 // [+, +=]
 #[test]
 fn vector3_add_operator() {
-    let vec3_1: Vector3<i32> = Vector3::new(1, 2, 3);
-    let vec3_2: Vector3<i32> = Vector3::new(3, 2, 1);
+    let vector3_1: Vector3<i32> = Vector3::new(1, 2, 3);
+    let vector3_2: Vector3<i32> = Vector3::new(3, 2, 1);
     let expected: Vector3<i32> = Vector3::new(4, 4, 4);
-    let got = vec3_1 + vec3_2;
+    let got = vector3_1 + vector3_2;
 
     assert_eq!(expected.x, got.x);
     assert_eq!(expected.y, got.y);
@@ -17,20 +17,20 @@ fn vector3_add_operator() {
 
 #[test]
 fn vector3_add_assign_operator() {
-    let mut vector3_1 = Vector3::new(1, 2, 3);
-    vector3_1 += Vector3::new(1, 2, 3);
+    let mut vector3 = Vector3::new(1, 2, 3);
+    vector3 += Vector3::new(1, 2, 3);
 
     let expected = Vector3::new(2, 4, 6);
-    assert_eq!(expected, vector3_1);
+    assert_eq!(expected, vector3);
 }
 
 // [-, -=]
 #[test]
 fn vector3_sub_operator() {
-    let vec3_1: Vector3<i32> = Vector3::new(1, 2, 3);
-    let vec3_2: Vector3<i32> = Vector3::new(3, 2, 1);
+    let vector3_1: Vector3<i32> = Vector3::new(1, 2, 3);
+    let vector3_2: Vector3<i32> = Vector3::new(3, 2, 1);
     let expected: Vector3<i32> = Vector3::new(-2, 0, 2);
-    let got = vec3_1 - vec3_2;
+    let got = vector3_1 - vector3_2;
 
     assert_eq!(expected.x, got.x);
     assert_eq!(expected.y, got.y);
@@ -39,43 +39,43 @@ fn vector3_sub_operator() {
 
 #[test]
 fn vector3_sub_assign_operator() {
-    let mut vec3_1: Vector3<i32> = Vector3::new(1, 2, 3);
-    vec3_1 -= Vector3::new(3, 2, 1);
+    let mut vector3: Vector3<i32> = Vector3::new(1, 2, 3);
+    vector3 -= Vector3::new(3, 2, 1);
 
     let expected = Vector3::new(-2, 0, 2);
-    assert_eq!(expected, vec3_1);
+    assert_eq!(expected, vector3);
 }
 
 // [*, *=]
 #[test]
 fn vector3_mul_by_scalar() {
-    let vec3: Vector3<i32> = Vector3::new(1, 2, 3);
+    let vector3: Vector3<i32> = Vector3::new(1, 2, 3);
     let expected = Vector3::new(2, 4, 6);
-    let got = vec3 * 2;
+    let got = vector3 * 2;
     assert_eq!(expected, got);
 }
 
 #[test]
 fn vector3_mul_assign_by_scalar() {
-    let mut vec3: Vector3<i32> = Vector3::new(1, 2, 3);
+    let mut vector3: Vector3<i32> = Vector3::new(1, 2, 3);
     let expected = Vector3::new(2, 4, 6);
-    vec3 *= 2;
+    vector3 *= 2;
 
-    assert_eq!(expected, vec3);
+    assert_eq!(expected, vector3);
 }
 
 // [=]
 #[test]
 fn vector3_eq_operator() {
-    let vec3_1: Vector3<i32> = Vector3::new(1, 2, 3);
-    let vec3_2: Vector3<i32> = Vector3::new(3, 2, 1);
+    let vector3_1: Vector3<i32> = Vector3::new(1, 2, 3);
+    let vector3_2: Vector3<i32> = Vector3::new(3, 2, 1);
     let vec3_3: Vector3<i32> = Vector3::new(1, 2, 3);
 
-    let equal_vector = vec3_1 == vec3_3;
+    let equal_vector = vector3_1 == vec3_3;
     let expected_equal = true;
     assert_eq!(expected_equal, equal_vector);
 
-    let not_equal_vector = vec3_1 == vec3_2;
+    let not_equal_vector = vector3_1 == vector3_2;
     let expected_not_equal = false;
     assert_eq!(expected_not_equal, not_equal_vector)
 }
@@ -83,11 +83,11 @@ fn vector3_eq_operator() {
 // [[]]
 #[test]
 fn vector3_index_operator() {
-    let vec3: Vector3<i32> = Vector3::new(1, 2, 3);
+    let vector3: Vector3<i32> = Vector3::new(1, 2, 3);
 
-    assert_eq!(vec3.x, vec3[0]);
-    assert_eq!(vec3.y, vec3[1]);
-    assert_eq!(vec3.z, vec3[2]);
+    assert_eq!(vector3.x, vector3[0]);
+    assert_eq!(vector3.y, vector3[1]);
+    assert_eq!(vector3.z, vector3[2]);
 }
 
 // Vector2
