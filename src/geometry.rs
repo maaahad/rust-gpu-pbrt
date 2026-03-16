@@ -66,7 +66,10 @@ where
     }
 }
 
-impl<T: PartialEq> PartialEq<Vector3<T>> for Vector3<T> {
+impl<T> PartialEq<Vector3<T>> for Vector3<T>
+where
+    T: PartialEq,
+{
     fn eq(&self, rhs: &Vector3<T>) -> bool {
         self.x == rhs.x && self.y == rhs.y && self.z == rhs.z
     }
