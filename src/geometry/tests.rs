@@ -74,6 +74,15 @@ fn vector3_div_by_scalar() {
     assert_eq!(expected, got);
 }
 
+#[test]
+fn vector3_div_assign_by_scalar() {
+    let mut vector3 = Vector3::new(2, 4, 6);
+    let expected = Vector3::new(1, 2, 3);
+    vector3 /= 2;
+
+    assert_eq!(expected, vector3);
+}
+
 // [=]
 #[test]
 fn vector3_eq_operator() {

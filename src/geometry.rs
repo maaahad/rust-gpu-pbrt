@@ -1,4 +1,7 @@
-use std::ops::{Add, AddAssign, Div, Index, Mul, MulAssign, Sub, SubAssign};
+use std::{
+    ops::{Add, AddAssign, Div, DivAssign, Index, Mul, MulAssign, Sub, SubAssign},
+    process::Output,
+};
 
 #[cfg(test)]
 mod tests;
@@ -111,6 +114,20 @@ where
     fn div(self, rhs: T) -> Self::Output {
         // TODO assert!(rhs > 0)
         Self {
+            x: self.x / rhs,
+            y: self.y / rhs,
+            z: self.z / rhs,
+        }
+    }
+}
+
+impl<T> DivAssign<T> for Vector3<T>
+where
+    T: Div<Output = T> + Copy,
+{
+    fn div_assign(&mut self, rhs: T) {
+        // TODO assert!(rhs > 0)
+        *self = Self {
             x: self.x / rhs,
             y: self.y / rhs,
             z: self.z / rhs,
