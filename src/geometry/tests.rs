@@ -46,12 +46,22 @@ fn vector3_sub_assign_operator() {
     assert_eq!(expected, vec3_1);
 }
 
+// [*, *=]
 #[test]
-fn vector2_mul_by_scalar() {
+fn vector3_mul_by_scalar() {
     let vec3: Vector3<i32> = Vector3::new(1, 2, 3);
     let expected = Vector3::new(2, 4, 6);
     let got = vec3 * 2;
     assert_eq!(expected, got);
+}
+
+#[test]
+fn vector3_mul_assign_by_scalar() {
+    let mut vec3: Vector3<i32> = Vector3::new(1, 2, 3);
+    let expected = Vector3::new(2, 4, 6);
+    vec3 *= 2;
+
+    assert_eq!(expected, vec3);
 }
 
 // [=]

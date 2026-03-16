@@ -1,4 +1,7 @@
-use std::ops::{Add, AddAssign, Index, Mul, Sub, SubAssign};
+use std::{
+    ops::{Add, AddAssign, Index, Mul, MulAssign, Sub, SubAssign},
+    process::Output,
+};
 
 #[cfg(test)]
 mod tests;
@@ -86,6 +89,19 @@ where
             x: self.x * multiplier,
             y: self.y * multiplier,
             z: self.z * multiplier,
+        }
+    }
+}
+
+impl<T> MulAssign<T> for Vector3<T>
+where
+    T: Mul<Output = T> + Copy,
+{
+    fn mul_assign(&mut self, rhs: T) {
+        *self = Self {
+            x: self.x * rhs,
+            y: self.y * rhs,
+            z: self.z * rhs,
         }
     }
 }
