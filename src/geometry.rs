@@ -1,4 +1,4 @@
-use std::ops::{Add, AddAssign, Index, Mul, Sub};
+use std::ops::{Add, AddAssign, Index, Mul, Sub, SubAssign};
 
 #[cfg(test)]
 mod tests;
@@ -46,6 +46,19 @@ impl<T: Sub<Output = T>> Sub<Vector3<T>> for Vector3<T> {
     type Output = Vector3<T>;
     fn sub(self, rhs: Vector3<T>) -> Self::Output {
         Self {
+            x: self.x - rhs.x,
+            y: self.y - rhs.y,
+            z: self.z - rhs.z,
+        }
+    }
+}
+
+impl<T> SubAssign<Vector3<T>> for Vector3<T>
+where
+    T: Sub<Output = T> + Copy,
+{
+    fn sub_assign(&mut self, rhs: Vector3<T>) {
+        *self = Self {
             x: self.x - rhs.x,
             y: self.y - rhs.y,
             z: self.z - rhs.z,

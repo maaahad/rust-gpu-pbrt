@@ -23,6 +23,7 @@ fn vector3_add_assign_operator() {
     assert_eq!(expected, vector3_1);
 }
 
+// [-, -=]
 #[test]
 fn vector3_sub_operator() {
     let vec3_1: Vector3<i32> = Vector3::new(1, 2, 3);
@@ -33,6 +34,15 @@ fn vector3_sub_operator() {
     assert_eq!(expected.x, got.x);
     assert_eq!(expected.y, got.y);
     assert_eq!(expected.z, got.z);
+}
+
+#[test]
+fn vector3_sub_assign_operator() {
+    let mut vec3_1: Vector3<i32> = Vector3::new(1, 2, 3);
+    vec3_1 -= Vector3::new(3, 2, 1);
+
+    let expected = Vector3::new(-2, 0, 2);
+    assert_eq!(expected, vec3_1);
 }
 
 #[test]
