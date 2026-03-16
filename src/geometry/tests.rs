@@ -83,6 +83,15 @@ fn vector3_div_assign_by_scalar() {
     assert_eq!(expected, vector3);
 }
 
+// [negation]
+#[test]
+fn vector3_neg_operator() {
+    let vector3 = Vector3::new(1, 2, 3);
+    let expected = Vector3::new(-1, -2, -3);
+    let got = -vector3;
+    assert_eq!(expected, got);
+}
+
 // [=]
 #[test]
 fn vector3_eq_operator() {
