@@ -1,4 +1,4 @@
-use std::ops::{Add, AddAssign, Index, Mul, MulAssign, Sub, SubAssign};
+use std::ops::{Add, AddAssign, Div, Index, Mul, MulAssign, Sub, SubAssign};
 
 #[cfg(test)]
 mod tests;
@@ -99,6 +99,21 @@ where
             x: self.x * rhs,
             y: self.y * rhs,
             z: self.z * rhs,
+        }
+    }
+}
+
+impl<T> Div<T> for Vector3<T>
+where
+    T: Div<Output = T> + Copy,
+{
+    type Output = Vector3<T>;
+    fn div(self, rhs: T) -> Self::Output {
+        // TODO assert!(rhs > 0)
+        Self {
+            x: self.x / rhs,
+            y: self.y / rhs,
+            z: self.z / rhs,
         }
     }
 }
