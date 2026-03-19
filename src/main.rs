@@ -1,6 +1,5 @@
-use pbrt::geometry::Vector3;
+use pbrt::image;
+
 fn main() {
-    println!("WIP: Geometry and Trandformation library");
-    let vec3: Vector3<i32> = Vector3::new(1, 2, 3);
-    println!("{vec3:?}");
+    image::render(256, 256);
 }
