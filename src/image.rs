@@ -7,8 +7,7 @@ pub fn render(width: u32, height: u32) {
 
     for _row in 0..width {
         for _col in 0..height {
-            println!("255 0 255");
+            println!("120 0 255");
         }
     }
 }
-
