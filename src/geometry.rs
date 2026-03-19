@@ -30,7 +30,6 @@ where
     }
 }
 
-// impl<T: Num + Copy> Vector3<T> {
 impl<T> Vector3<T>
 where
     T: Add<Output = T> + Mul<Output = T> + Copy,
