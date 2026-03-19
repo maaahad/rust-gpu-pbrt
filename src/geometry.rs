@@ -1,4 +1,4 @@
-use num::{Num, Signed};
+use num::Signed;
 use std::ops::{Add, AddAssign, Div, DivAssign, Index, Mul, MulAssign, Neg, Sub, SubAssign};
 
 #[cfg(test)]
@@ -30,7 +30,11 @@ where
     }
 }
 
-impl<T: Num + Copy> Vector3<T> {
+// impl<T: Num + Copy> Vector3<T> {
+impl<T> Vector3<T>
+where
+    T: Add<Output = T> + Mul<Output = T> + Copy,
+{
     pub fn length_squared(&self) -> T {
         self.x * self.x + self.y * self.y + self.z * self.z
     }
