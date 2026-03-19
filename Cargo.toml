@@ -12,3 +12,4 @@ name = "pbrt"
 path = "src/main.rs"
 
 [dependencies]
+num-traits = "0.2"

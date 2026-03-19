@@ -118,6 +118,15 @@ fn vector3_index_operator() {
     assert_eq!(vector3.z, vector3[2]);
 }
 
+// [abs]
+#[test]
+fn vector3_abs() {
+    let mut vector3 = Vector3::new(-1, -2, -3);
+    vector3.abs();
+
+    assert_eq!(vector3, Vector3::new(1, 2, 3));
+}
+
 // Vector2
 #[test]
 fn vector2_index_operator() {

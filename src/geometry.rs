@@ -1,3 +1,4 @@
+use num_traits::Signed;
 use std::ops::{Add, AddAssign, Div, DivAssign, Index, Mul, MulAssign, Neg, Sub, SubAssign};
 
 #[cfg(test)]
@@ -14,6 +15,19 @@ pub struct Vector3<T> {
 impl<T> Vector3<T> {
     pub fn new(x: T, y: T, z: T) -> Self {
         Self { x, y, z }
+    }
+}
+
+impl<T> Vector3<T>
+where
+    T: Signed,
+{
+    pub fn abs(&mut self) {
+        *self = Self {
+            x: self.x.abs(),
+            y: self.y.abs(),
+            z: self.z.abs(),
+        }
     }
 }
 
