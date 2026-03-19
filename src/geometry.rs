@@ -1,4 +1,4 @@
-use num_traits::Signed;
+use num::{Num, Signed};
 use std::ops::{Add, AddAssign, Div, DivAssign, Index, Mul, MulAssign, Neg, Sub, SubAssign};
 
 #[cfg(test)]
@@ -27,6 +27,16 @@ where
             y: self.y.abs(),
             z: self.z.abs(),
         }
+    }
+}
+
+impl Vector3<i32> {
+    fn length_squared(&self) -> i32 {
+        self.x * self.x + self.y * self.y + self.z * self.z
+    }
+
+    pub fn length(&self) -> i32 {
+        self.length_squared().isqrt()
     }
 }
 

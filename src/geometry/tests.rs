@@ -127,6 +127,12 @@ fn vector3_abs() {
     assert_eq!(vector3, Vector3::new(1, 2, 3));
 }
 
+#[test]
+fn vector3_length() {
+    let vector3 = Vector3::new(0, 3, 4);
+    assert_eq!(vector3.length(), 5);
+}
+
 // Vector2
 #[test]
 fn vector2_index_operator() {
