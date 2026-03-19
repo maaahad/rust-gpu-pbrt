@@ -128,7 +128,13 @@ fn vector3_abs() {
 }
 
 #[test]
-fn vector3_length() {
+fn vector3_length_f64() {
+    let vector3 = Vector3::new(0.0, 3.0, 4.0);
+    assert_eq!(vector3.length(), 5.0);
+}
+
+#[test]
+fn vector3_length_i64() {
     let vector3 = Vector3::new(0, 3, 4);
     assert_eq!(vector3.length(), 5);
 }

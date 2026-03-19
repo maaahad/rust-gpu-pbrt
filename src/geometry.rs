@@ -30,13 +30,21 @@ where
     }
 }
 
-impl Vector3<i32> {
-    fn length_squared(&self) -> i32 {
+impl<T: Num + Copy> Vector3<T> {
+    pub fn length_squared(&self) -> T {
         self.x * self.x + self.y * self.y + self.z * self.z
     }
+}
 
+impl Vector3<i32> {
     pub fn length(&self) -> i32 {
         self.length_squared().isqrt()
+    }
+}
+
+impl Vector3<f64> {
+    pub fn length(&self) -> f64 {
+        self.length_squared().sqrt()
     }
 }
 
