@@ -1,3 +1,1 @@
-pub fn test() {
-    println!("Hello from library");
-}
+pub mod geometry;
