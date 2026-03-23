@@ -1,4 +1,4 @@
-use num::Signed;
+use num::{Signed, integer::Roots};
 use std::ops::{Add, AddAssign, Div, DivAssign, Index, Mul, MulAssign, Neg, Sub, SubAssign};
 
 #[cfg(test)]
