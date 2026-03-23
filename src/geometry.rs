@@ -218,20 +218,20 @@ where
     }
 }
 
-#[derive(Debug)]
-pub struct Vector2<T> {
+#[derive(Debug, Clone)]
+pub struct Vector2<T: Num> {
     x: T,
     y: T,
 }
 
-impl<T> Vector2<T> {
+impl<T: Num> Vector2<T> {
     pub fn new(x: T, y: T) -> Self {
         Self { x, y }
     }
 }
 
 // Operators overloads
-impl<T> Index<usize> for Vector2<T> {
+impl<T: Num> Index<usize> for Vector2<T> {
     type Output = T;
     fn index(&self, index: usize) -> &Self::Output {
         match index {
