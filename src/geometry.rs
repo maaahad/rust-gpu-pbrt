@@ -1,4 +1,4 @@
-use num::{Signed, integer::Roots};
+use num::Signed;
 use std::ops::{Add, AddAssign, Div, DivAssign, Index, Mul, MulAssign, Neg, Sub, SubAssign};
 
 #[cfg(test)]
@@ -39,6 +39,7 @@ where
     }
 }
 
+// TODO: we need generic length method for float and integer
 impl Vector3<i32> {
     pub fn length(&self) -> i32 {
         self.length_squared().isqrt()
