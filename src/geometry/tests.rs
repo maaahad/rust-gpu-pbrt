@@ -154,6 +154,24 @@ fn vector3_dot() {
     assert_eq!(expected_f, vector3_1f.dot(&vector3_2f));
 }
 
+#[test]
+fn vector3_cross() {
+    let vector3_1i = Vector3::new(1, 2, 3);
+    let vector3_2i = Vector3::new(4, 5, 6);
+
+    // (12 - 15)i, (12 - 6)j, (5 - 8)k;
+
+    let expected_i = Vector3::new(-3, 6, -3);
+
+    assert_eq!(expected_i, vector3_1i.cross(&vector3_2i));
+
+    let vector3_1f = Vector3::new(1.0, 2.0, 3.0);
+    let vector3_2f = Vector3::new(4.0, 5.0, 6.0);
+    let expected_f = Vector3::new(-3.0, 6.0, -3.0);
+
+    assert_eq!(expected_f, vector3_1f.cross(&vector3_2f));
+}
+
 // Vector2
 #[test]
 fn vector2_index_operator() {

@@ -32,7 +32,7 @@ where
 
 impl<T> Vector3<T>
 where
-    T: Add<Output = T> + Mul<Output = T> + Copy,
+    T: Add<Output = T> + Sub<Output = T> + Mul<Output = T> + Copy,
 {
     pub fn length_squared(&self) -> T {
         self.x * self.x + self.y * self.y + self.z * self.z
@@ -40,6 +40,14 @@ where
 
     pub fn dot(&self, other: &Self) -> T {
         self.x * other.x + self.y * other.y + self.z * other.z
+    }
+
+    pub fn cross(&self, other: &Self) -> Vector3<T> {
+        Self {
+            x: self.y * other.z - self.z * other.y,
+            y: self.z * other.x - self.x * other.z,
+            z: self.x * other.y - self.y * other.x,
+        }
     }
 }
 
