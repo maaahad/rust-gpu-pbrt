@@ -139,6 +139,21 @@ fn vector3_length_i64() {
     assert_eq!(vector3.length(), 5);
 }
 
+#[test]
+fn vector3_dot() {
+    let vector3_1i = Vector3::new(1, 2, 3);
+    let vector3_2i = Vector3::new(4, 5, 6);
+    let expected_i: i32 = 4 + 10 + 18;
+
+    assert_eq!(expected_i, vector3_1i.dot(&vector3_2i));
+
+    let vector3_1f = Vector3::new(1.0, 2.0, 3.0);
+    let vector3_2f = Vector3::new(4.0, 5.0, 6.0);
+    let expected_f = 4.0 + 10.0 + 18.0;
+
+    assert_eq!(expected_f, vector3_1f.dot(&vector3_2f));
+}
+
 // Vector2
 #[test]
 fn vector2_index_operator() {

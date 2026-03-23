@@ -37,6 +37,10 @@ where
     pub fn length_squared(&self) -> T {
         self.x * self.x + self.y * self.y + self.z * self.z
     }
+
+    pub fn dot(&self, other: &Self) -> T {
+        self.x * other.x + self.y * other.y + self.z * other.z
+    }
 }
 
 // TODO: we need generic length method for float and integer
