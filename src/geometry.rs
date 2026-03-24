@@ -1,5 +1,9 @@
 use num::{Float, Num, Signed};
-use std::ops::{Add, AddAssign, Div, DivAssign, Index, Mul, MulAssign, Neg, Sub, SubAssign};
+use std::{
+    ffi::c_long,
+    ops::{Add, AddAssign, Div, DivAssign, Index, Mul, MulAssign, Neg, Sub, SubAssign},
+    process::Output,
+};
 
 #[cfg(test)]
 mod tests;
@@ -55,9 +59,19 @@ where
 }
 
 // TODO: the following method should be implemented for integer as well later
-impl<T: Float> Vector3<T> {
+impl<T> Vector3<T>
+where
+    T: Float,
+{
     pub fn length(&self) -> T {
         self.length_squared().sqrt()
+    }
+
+    pub fn unit_vector(&self) -> Self {
+        let Self { x, y, z } = *self;
+        let copied = Self { x, y, z };
+        let length = copied.length();
+        copied / length
     }
 }
 

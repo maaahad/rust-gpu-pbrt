@@ -174,10 +174,10 @@ fn vector3_cross() {
 
 #[test]
 fn vector3_unit() {
-    // let vector3 = Vector3::new(0.0, 3.0, 4.0);
+    let vector3 = Vector3::new(0.0, 3.0, 4.0);
     let expected = Vector3::new(0.0, 0.6, 0.8);
 
-    // assert_eq!(expected, vector3.unit());
+    assert_eq!(expected, vector3.unit_vector());
     assert_eq!(expected.length(), 1.0);
 }
 
