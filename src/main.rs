@@ -1,5 +1,5 @@
 use pbrt::image;
 
 fn main() {
-    image::render(256, 256);
+    image::write_color(256, 256);
 }
