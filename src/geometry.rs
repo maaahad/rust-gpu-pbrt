@@ -1,9 +1,5 @@
 use num::{Float, Num, Signed};
-use std::{
-    ffi::c_long,
-    ops::{Add, AddAssign, Div, DivAssign, Index, Mul, MulAssign, Neg, Sub, SubAssign},
-    process::Output,
-};
+use std::ops::{Add, AddAssign, Div, DivAssign, Index, Mul, MulAssign, Neg, Sub, SubAssign};
 
 #[cfg(test)]
 mod tests;
