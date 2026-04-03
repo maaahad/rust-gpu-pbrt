@@ -1,5 +1,7 @@
 use pbrt::image;
 
+const WIDTH: u32 = 256;
+const HEIGHT: u32 = 256;
 fn main() {
-    image::write_color(256, 256);
+    image::render(WIDTH, HEIGHT);
 }

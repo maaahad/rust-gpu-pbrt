@@ -245,3 +245,7 @@ impl<T: Num> Index<usize> for Vector2<T> {
         }
     }
 }
+
+// type alias
+// TODO: make the alias more generic
+pub type Color = Vector3<f64>;
