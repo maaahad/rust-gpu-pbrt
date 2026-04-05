@@ -1,17 +1,20 @@
-use num_traits::Signed;
+use num::{Float, Num, Signed};
 use std::ops::{Add, AddAssign, Div, DivAssign, Index, Mul, MulAssign, Neg, Sub, SubAssign};
 
 #[cfg(test)]
 mod tests;
 
-#[derive(Debug)]
-pub struct Vector3<T> {
+#[derive(Debug, Clone)]
+pub struct Vector3<T: Num> {
     pub x: T,
     pub y: T,
     pub z: T,
 }
 
-impl<T> Vector3<T> {
+impl<T> Vector3<T>
+where
+    T: Num + Copy,
+{
     pub fn new(x: T, y: T, z: T) -> Self {
         Self { x, y, z }
     }
@@ -30,8 +33,49 @@ where
     }
 }
 
+impl<T> Vector3<T>
+where
+    T: Num + Copy,
+{
+    pub fn length_squared(&self) -> T {
+        self.x * self.x + self.y * self.y + self.z * self.z
+    }
+
+    pub fn dot(&self, other: &Self) -> T {
+        self.x * other.x + self.y * other.y + self.z * other.z
+    }
+
+    pub fn cross(&self, other: &Self) -> Self {
+        Self {
+            x: self.y * other.z - self.z * other.y,
+            y: self.z * other.x - self.x * other.z,
+            z: self.x * other.y - self.y * other.x,
+        }
+    }
+}
+
+// TODO: the following method should be implemented for integer as well later
+impl<T> Vector3<T>
+where
+    T: Float,
+{
+    pub fn length(&self) -> T {
+        self.length_squared().sqrt()
+    }
+
+    pub fn unit_vector(&self) -> Self {
+        let Self { x, y, z } = *self;
+        let copied = Self { x, y, z };
+        let length = copied.length();
+        copied / length
+    }
+}
+
 // Operators overloads
-impl<T: Add<Output = T>> Add<Vector3<T>> for Vector3<T> {
+impl<T> Add<Vector3<T>> for Vector3<T>
+where
+    T: Num + Copy,
+{
     type Output = Vector3<T>;
     fn add(self, rhs: Vector3<T>) -> Self::Output {
         Self {
@@ -44,7 +88,7 @@ impl<T: Add<Output = T>> Add<Vector3<T>> for Vector3<T> {
 
 impl<T> AddAssign<Vector3<T>> for Vector3<T>
 where
-    T: Add<Output = T> + Copy,
+    T: Num + Copy,
 {
     fn add_assign(&mut self, rhs: Vector3<T>) {
         *self = Self {
@@ -55,7 +99,10 @@ where
     }
 }
 
-impl<T: Sub<Output = T>> Sub<Vector3<T>> for Vector3<T> {
+impl<T> Sub<Vector3<T>> for Vector3<T>
+where
+    T: Num + Copy,
+{
     type Output = Vector3<T>;
     fn sub(self, rhs: Vector3<T>) -> Self::Output {
         Self {
@@ -68,7 +115,7 @@ impl<T: Sub<Output = T>> Sub<Vector3<T>> for Vector3<T> {
 
 impl<T> SubAssign<Vector3<T>> for Vector3<T>
 where
-    T: Sub<Output = T> + Copy,
+    T: Num + Copy,
 {
     fn sub_assign(&mut self, rhs: Vector3<T>) {
         *self = Self {
@@ -81,7 +128,7 @@ where
 
 impl<T> PartialEq<Vector3<T>> for Vector3<T>
 where
-    T: PartialEq,
+    T: Num + Copy,
 {
     fn eq(&self, rhs: &Vector3<T>) -> bool {
         self.x == rhs.x && self.y == rhs.y && self.z == rhs.z
@@ -90,6 +137,7 @@ where
 
 impl<T> Mul<T> for Vector3<T>
 where
+    T: Num + Copy,
     T: Mul<Output = T> + Copy,
 {
     type Output = Vector3<T>;
@@ -105,7 +153,7 @@ where
 
 impl<T> MulAssign<T> for Vector3<T>
 where
-    T: Mul<Output = T> + Copy,
+    T: Num + Copy,
 {
     fn mul_assign(&mut self, rhs: T) {
         *self = Self {
@@ -118,7 +166,7 @@ where
 
 impl<T> Div<T> for Vector3<T>
 where
-    T: Div<Output = T> + Copy,
+    T: Num + Copy,
 {
     type Output = Vector3<T>;
     fn div(self, rhs: T) -> Self::Output {
@@ -133,7 +181,7 @@ where
 
 impl<T> DivAssign<T> for Vector3<T>
 where
-    T: Div<Output = T> + Copy,
+    T: Num + Copy,
 {
     fn div_assign(&mut self, rhs: T) {
         // TODO assert!(rhs > 0)
@@ -147,7 +195,7 @@ where
 
 impl<T> Neg for Vector3<T>
 where
-    T: Neg<Output = T> + Copy,
+    T: Num + Neg<Output = T> + Copy,
 {
     type Output = Self;
     fn neg(self) -> Self::Output {
@@ -159,7 +207,10 @@ where
     }
 }
 
-impl<T> Index<usize> for Vector3<T> {
+impl<T> Index<usize> for Vector3<T>
+where
+    T: Num + Copy,
+{
     type Output = T;
     fn index(&self, index: usize) -> &Self::Output {
         match index {
@@ -171,20 +222,20 @@ impl<T> Index<usize> for Vector3<T> {
     }
 }
 
-#[derive(Debug)]
-pub struct Vector2<T> {
+#[derive(Debug, Clone)]
+pub struct Vector2<T: Num> {
     x: T,
     y: T,
 }
 
-impl<T> Vector2<T> {
+impl<T: Num> Vector2<T> {
     pub fn new(x: T, y: T) -> Self {
         Self { x, y }
     }
 }
 
 // Operators overloads
-impl<T> Index<usize> for Vector2<T> {
+impl<T: Num> Index<usize> for Vector2<T> {
     type Output = T;
     fn index(&self, index: usize) -> &Self::Output {
         match index {
@@ -194,3 +245,7 @@ impl<T> Index<usize> for Vector2<T> {
         }
     }
 }
+
+// type alias
+// TODO: make the alias more generic
+pub type Color = Vector3<f64>;

@@ -127,6 +127,60 @@ fn vector3_abs() {
     assert_eq!(vector3, Vector3::new(1, 2, 3));
 }
 
+#[test]
+fn vector3_length_f() {
+    let vector3 = Vector3::new(0.0, 3.0, 4.0);
+    assert_eq!(vector3.length(), 5.0);
+}
+
+// #[test]
+// fn vector3_length_i() {
+//     let vector3 = Vector3::new(0, 3, 4);
+//     assert_eq!(vector3.length(), 5);
+// }
+
+#[test]
+fn vector3_dot() {
+    let vector3_1i = Vector3::new(1, 2, 3);
+    let vector3_2i = Vector3::new(4, 5, 6);
+    let expected_i: i32 = 4 + 10 + 18;
+
+    assert_eq!(expected_i, vector3_1i.dot(&vector3_2i));
+
+    let vector3_1f = Vector3::new(1.0, 2.0, 3.0);
+    let vector3_2f = Vector3::new(4.0, 5.0, 6.0);
+    let expected_f = 4.0 + 10.0 + 18.0;
+
+    assert_eq!(expected_f, vector3_1f.dot(&vector3_2f));
+}
+
+#[test]
+fn vector3_cross() {
+    let vector3_1i = Vector3::new(1, 2, 3);
+    let vector3_2i = Vector3::new(4, 5, 6);
+
+    // (12 - 15)i, (12 - 6)j, (5 - 8)k;
+
+    let expected_i = Vector3::new(-3, 6, -3);
+
+    assert_eq!(expected_i, vector3_1i.cross(&vector3_2i));
+
+    let vector3_1f = Vector3::new(1.0, 2.0, 3.0);
+    let vector3_2f = Vector3::new(4.0, 5.0, 6.0);
+    let expected_f = Vector3::new(-3.0, 6.0, -3.0);
+
+    assert_eq!(expected_f, vector3_1f.cross(&vector3_2f));
+}
+
+#[test]
+fn vector3_unit() {
+    let vector3 = Vector3::new(0.0, 3.0, 4.0);
+    let expected = Vector3::new(0.0, 0.6, 0.8);
+
+    assert_eq!(expected, vector3.unit_vector());
+    assert_eq!(expected.length(), 1.0);
+}
+
 // Vector2
 #[test]
 fn vector2_index_operator() {
