@@ -35,7 +35,25 @@ fn get_config() -> Config {
     }
 }
 
+fn hit_sphere(center: &Vector3<f64>, radius: f64, ray: &Ray) -> bool {
+    let oc = *center - ray.origin;
+    let a = ray.direction.dot(&ray.direction);
+    let b = ray.direction.dot(&oc) * (-2.0);
+    let c = oc.dot(&oc) - radius * radius;
+    let discriminant = b * b - 4.0 * a * c;
+
+    discriminant >= 0.0
+}
+
 fn ray_color(ray: &Ray) -> image::Color {
+    if hit_sphere(&Vector3::new(0.0, 0.0, -1.0), 0.5, ray) {
+        return image::Color {
+            x: 1.0,
+            y: 0.0,
+            z: 0.0,
+        };
+    }
+
     let unit_direction = ray.direction.unit_vector();
     let a = 0.5 * (unit_direction.y + 1.0);
 
