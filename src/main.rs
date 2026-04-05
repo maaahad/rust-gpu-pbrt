@@ -70,12 +70,6 @@ fn ray_color(ray: &Ray) -> image::Color {
     };
 
     start_color * (1.0 - a) + end_color * a
-
-    // image::Color {
-    //     x: 1.0,
-    //     y: 1.0,
-    //     z: 1.0,
-    // }
 }
 
 fn render(config: &Config) {
@@ -119,11 +113,6 @@ fn render(config: &Config) {
             let ray = Ray::new(camera_center, ray_direction);
 
             image::write_color(&ray_color(&ray));
-            // image::write_color(&image::Color {
-            //     x: col as f64 / width as f64,
-            //     y: row as f64 / height as f64,
-            //     z: 0.0,
-            // });
         }
     }
 }
