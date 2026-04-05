@@ -4,8 +4,8 @@ use super::geometry::Vector3;
 mod tests;
 
 pub struct Ray {
-    origin: Vector3<f64>,
-    direction: Vector3<f64>,
+    pub origin: Vector3<f64>,
+    pub direction: Vector3<f64>,
 }
 
 impl Ray {
@@ -15,6 +15,6 @@ impl Ray {
 
     pub fn at(&self, t: f64) -> Vector3<f64> {
         // TODO: how to get rid of clone???
-        self.origin.clone() + self.direction.clone() * t
+        self.origin + self.direction * t
     }
 }
